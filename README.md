@@ -16,17 +16,20 @@ I think people who will use this plugin should be Chinese, so I'll use Chinese i
 还有一步，在工程的`cordova_plugins.js`和`config.xml`里增加对应plugin的说明
 ios版
 
+```html
 <feature name="QQLogin">
     <param name="ios-package" value="QQLogin" />
 </feature>
 
+```
 
 
 android版
-
+```html
 <feature name="QQLogin">
     <param name="android-package" value="com.example.cordova.qqLogin.QQLogin" />
 </feature>
+```
 
 
 注意，android版`value`对应的是`QQLogin.java`这个文件所在的路径
