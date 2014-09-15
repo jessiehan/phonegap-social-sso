@@ -14,8 +14,8 @@ I think people who will use this plugin should be Chinese, so I'll use Chinese i
 环境配好了，Next，就是写代码了，直接把`.java`和`.m` `.h`文件copy到工程里，然后把`www/plugins`下的`qqLogin.js`拷贝到对应的`www/plugins`目录下
 
 还有一步，在工程的`cordova_plugins.js`和`config.xml`里增加对应plugin的说明
-ios版
 
+ios版
 ```html
 <feature name="QQLogin">
     <param name="ios-package" value="QQLogin" />

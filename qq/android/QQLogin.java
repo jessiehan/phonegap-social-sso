@@ -34,7 +34,6 @@ public class QQLogin extends CordovaPlugin{
 		mCallbackContext=callbackContext;
 
         if (action.equals("ssoLogin")) {
-        	Log.d("登陆","登陆");
         	this.ssoLogin();
 
 
@@ -54,10 +53,13 @@ public class QQLogin extends CordovaPlugin{
 	
 	
 	public void ssoLogin(){
-        // 创建授权认证信息
+
+		final Activity activity = this.cordova.getActivity();
+
 		Context context = this.cordova.getActivity().getApplicationContext();
 		mTencent = Tencent.createInstance(APPID, context);
-		IUiListener listener = new BaseUiListener() {
+		
+		final IUiListener listener = new BaseUiListener() {
 			@Override
 			protected void doComplete(JSONObject values) {
 				
@@ -67,9 +69,18 @@ public class QQLogin extends CordovaPlugin{
 			
 			
 		};
-		mTencent.login(this.cordova.getActivity(), "all", listener);
+		
+		this.cordova.getActivity().runOnUiThread(new Runnable() {
+	        @Override
+	        public void run() {
+
+	        	mTencent.login(activity, "all", listener);
+	        }
+	    });
+		
 		
 	}
+	
 	
 
 	private class BaseUiListener implements IUiListener {
