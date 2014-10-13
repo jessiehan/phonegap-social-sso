@@ -53,7 +53,7 @@ public class QQLogin extends CordovaPlugin{
 	
 	
 	public void ssoLogin(){
-
+        // 创建授权认证信息
 		final Activity activity = this.cordova.getActivity();
 
 		Context context = this.cordova.getActivity().getApplicationContext();

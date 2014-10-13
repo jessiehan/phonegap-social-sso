@@ -1,4 +1,5 @@
 package com.example.cordova.weiboLogin;
+
 import java.text.SimpleDateFormat;
 
 import org.apache.cordova.CallbackContext;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.flipped.match.Filpped;
 import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuth;
@@ -25,24 +27,23 @@ import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
 
 public class WeiboLogin extends CordovaPlugin{
-	public static final String SCOPE = 
+    public static final String SCOPE = 
             "email,direct_messages_read"
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
             + "follow_app_official_microblog," + "invitation_write";
-	public static final String APPKEY ="123456789"; 
-	public static final String REDIRECT_URL ="https://api.weibo.com/oauth2/default.html"; 
+    public static final String APPKEY ="123456789"; 
+    public static final String REDIRECT_URL ="https://api.weibo.com/oauth2/default.html"; 
     private CallbackContext  mCallbackContext = null;
     private  SsoHandler mSsoHandler=null;
 
 
-	@Override
+    @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-		mCallbackContext=callbackContext;
+        mCallbackContext=callbackContext;
 
         if (action.equals("ssoLogin")) {
-        	
-        	Log.d("µÇÂ½","µÇÂ½");
-        	this.ssoLogin();
+            
+            this.ssoLogin();
 
 
         } 
@@ -52,67 +53,69 @@ public class WeiboLogin extends CordovaPlugin{
         }
         return true;
     }
-	
-	
-	public void ssoLogin(){
-        // ´´½¨ÊÚÈ¨ÈÏÖ¤ĞÅÏ¢
-		Context context = this.cordova.getActivity().getApplicationContext();
+    
+    
+    public void ssoLogin(){
+        // åˆ›å»ºæˆæƒè®¤è¯ä¿¡æ¯
 
-        AuthInfo authInfo = new AuthInfo(context,APPKEY,REDIRECT_URL,SCOPE);
-		WeiboAuth weiboAuth = new WeiboAuth(context, authInfo);
-		mSsoHandler=new SsoHandler(this.cordova.getActivity(), weiboAuth);
-		//important
-		
-		this.cordova.setActivityResultCallback(this);
-		mSsoHandler.authorize(new AuthListener());
-	}
-	
-	/**
-     * µ± SSO ÊÚÈ¨ Activity ÍË³öÊ±£¬¸Ãº¯Êı±»µ÷ÓÃ¡£
+        AuthInfo authInfo = new AuthInfo(Filpped.mContext,APPKEY,REDIRECT_URL,SCOPE);
+        WeiboAuth weiboAuth = new WeiboAuth(Filpped.mContext, authInfo);
+        mSsoHandler=new SsoHandler(Filpped.mActivity, weiboAuth);
+        //important
+        
+        this.cordova.setActivityResultCallback(this);
+        this.cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mSsoHandler.authorize(new AuthListener());
+            }
+        });
+        
+    }
+    
+    /**
+     * å½“ SSO æˆæƒ Activity é€€å‡ºæ—¶ï¼Œè¯¥å‡½æ•°è¢«è°ƒç”¨ã€‚
      * 
      * @see {@link Activity#onActivityResult}
      */
     @Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        System.out.println("µÇÂ½£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡");
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        // SSO ÊÚÈ¨»Øµ÷
-        // ÖØÒª£º·¢Æğ SSO µÇÂ½µÄ Activity ±ØĞëÖØĞ´ onActivityResult
+        // SSO æˆæƒå›è°ƒ
+        // é‡è¦ï¼šå‘èµ· SSO ç™»é™†çš„ Activity å¿…é¡»é‡å†™ onActivityResult
         if (mSsoHandler != null) {
             mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
         }
     }
-
-	 
+     
  
-	/**
-     * µÇÈë°´Å¥µÄ¼àÌıÆ÷£¬½ÓÊÕÊÚÈ¨½á¹û¡£
+    /**
+     * ç™»å…¥æŒ‰é’®çš„ç›‘å¬å™¨ï¼Œæ¥æ”¶æˆæƒç»“æœã€‚
      */
-	private class AuthListener implements WeiboAuthListener {
+    private class AuthListener implements WeiboAuthListener {
         @Override
         public void onComplete(Bundle values) {
             Oauth2AccessToken accessToken = Oauth2AccessToken.parseAccessToken(values);
-            System.out.println("Íê³É£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡");
 
             if (accessToken != null && accessToken.isSessionValid()) {
                 String uid=accessToken.getUid();
                 String token=accessToken.getToken();
                 JSONObject res=new JSONObject();
                 try {
-                	
+                    
                     res.put("uid", uid);
-					res.put("token", token);
-	                mCallbackContext.success(res);
-	            	Log.d("uid",uid);
+                    res.put("token", token);
+                    mCallbackContext.success(res);
+                    Log.d("uid",uid);
 
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					mCallbackContext.error(0);
-					e.printStackTrace();
-				}
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    mCallbackContext.error(0);
+                    e.printStackTrace();
+                }
 
                 
 
@@ -121,21 +124,20 @@ public class WeiboLogin extends CordovaPlugin{
 
         @Override
         public void onWeiboException(WeiboException e) {
-            System.out.println("ÓĞÎÊÌâ£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡");
 
-			mCallbackContext.error(0);
+            mCallbackContext.error(0);
         }
 
         @Override
         public void onCancel() {
-            System.out.println("ÓĞÎÊÌâ£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡");
 
-			mCallbackContext.error(0);
+            mCallbackContext.error(0);
 
 
         }
     }
 
-	
+    
 
 }
+
