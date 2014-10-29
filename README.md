@@ -48,6 +48,42 @@ $('#qq-login').click(function() {
 });
 ```
 
+另外，ios的AppDelegate.m,openURL里要加上如下所示代码：
+```objective-c
+
+// this happens while we are running ( in the background, or from within our own app )
+// only valid if Filpped-Info.plist specifies a protocol to handle
+- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+{
+    if (!url) {
+        return NO;
+    }
+
+    // calls into javascript global function 'handleOpenURL'
+    NSString* jsString = [NSString stringWithFormat:@"handleOpenURL(\"%@\");", url];
+    [self.viewController.webView stringByEvaluatingJavaScriptFromString:jsString];
+
+    // all plugins will get the notification, and their handlers will be called
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
+    // weiboLogin
+    WeiboLogin *weiboPlugin = [self.viewController.pluginObjects objectForKey:@"WeiboLogin"];
+    [WeiboSDK handleOpenURL:url delegate:weiboPlugin];
+    
+    // renrenLogin
+    RenrenLogin *renrenPlugin = [self.viewController.pluginObjects objectForKey:@"RenrenLogin"];
+    [RennClient handleOpenURL:url];
+    [TencentOAuth HandleOpenURL:url ];
+    QQLogin *qqPlugin = [self.viewController.pluginObjects objectForKey:@"QQLogin"];
+
+    [QQApiInterface handleOpenURL:url delegate:qqPlugin];
+    
+
+
+    
+    return YES;
+}
+```
+
 
 
 
