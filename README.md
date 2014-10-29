@@ -48,7 +48,7 @@ $('#qq-login').click(function() {
 });
 ```
 
-另外，ios的AppDelegate.m,openURL里要加上如下所示代码：
+另外，ios的`AppDelegate.m`，`openURL`里要加上如下所示代码，当然还要import对应的`.h`文件：
 ```objective-c
 
 // this happens while we are running ( in the background, or from within our own app )
