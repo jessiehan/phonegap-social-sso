@@ -35,6 +35,21 @@ android版
 注意，android版`value`对应的是`QQLogin.java`这个文件所在的路径
 
 
+最后在对应的js里写上登录按钮的点击事件，比如
+
+```javascript
+$('#qq-login').click(function() {
+    qqLogin.ssoLogin(function(res) {
+        alert('uid:'+res.uid+' token:'+res.token);
+    }, function() {
+        alert('授权失败');
+    });
+
+});
+```
+
+
+
 
 ## 微博登录
 
