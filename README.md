@@ -103,6 +103,9 @@ $('#qq-login').click(function() {
 
 
 
+# Update
+
+加上了ios的demo
 
 
 # to do
