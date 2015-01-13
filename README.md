@@ -107,6 +107,14 @@ $('#qq-login').click(function() {
 
 加上了ios的demo
 
+也有同学问为哈不写成phonegap标准的插件，这样可以命令行安装
+
+因为涉及到第三方的library和配置，所以命令行一键安装不大可行，为了方便大家，准备写第三方登录的demo
+
+# notice
+
+demo里涉及到第三方的appId或者appSecret，大家自己去注册一个吧，demo里由于appId的原因，微博登录是失败滴
+
 
 # to do
 

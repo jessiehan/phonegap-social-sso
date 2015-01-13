@@ -6,27 +6,27 @@ var app = {
     bindEvents: function() {
         document.getElementById('qq-login').addEventListener('click',function(){
             qqLogin.ssoLogin(function(res){
-                alert('<p>uid:'+res.uid+'</p><p>token:'+res.token+'</p>');
+                alert('uid:'+res.uid+'  token:'+res.token);
             },function(){
                 alert('error');
-            })
+            });
 
         },false);
 
         document.getElementById('weibo-login').addEventListener('click',function(){
             weiboLogin.ssoLogin(function(res){
-                alert('<p>uid:'+res.uid+'</p><p>token:'+res.token+'</p>');
+                alert('uid:'+res.uid+'  token:'+res.token);
             },function(){
                 alert('error');
-            })
+            });
 
         },false);
         document.getElementById('renren-login').addEventListener('click',function(){
             renrenLogin.ssoLogin(function(res){
-                alert('<p>uid:'+res.uid+'</p><p>token:'+res.token+'</p>');
+                alert('uid:'+res.uid+'  token:'+res.token);
             },function(){
                 alert('error');
-            })
+            });
 
         },false);
 
