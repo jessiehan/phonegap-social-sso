@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9A0E40EB-F3FA-40BC-AA21-2DBD9C55E199</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SSO</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>681AB5D18208F0B79170E5321BCD573BA8885059</key>
+		<string>https://github.com/jessiehan/phonegap-social-sso.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>sso/platforms/ios/SSO.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>681AB5D18208F0B79170E5321BCD573BA8885059</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jessiehan/phonegap-social-sso.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>681AB5D18208F0B79170E5321BCD573BA8885059</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>681AB5D18208F0B79170E5321BCD573BA8885059</string>
+			<key>IDESourceControlWCCName</key>
+			<string>phonegap-social-sso</string>
+		</dict>
+	</array>
+</dict>
+</plist>
